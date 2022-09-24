@@ -16,9 +16,10 @@ Query live crypto trading API for real-time information: https://www.coingecko.c
 - Manage Portfolio trades
 - Monitor value of portfolios of particular trades
 - View Cryptocurrency Market Value
+- Sort/Filter Accounts by performance
 
 ## Backend Functionalities 
 - Create, Read, Update and Delete cryptocurrencies owned (CRUD)
 - Sort/Filter cryptocurrencies owned by value
 - Sort/Filter all cryptocurrencies by value
-- Get all the users with the top performing portfolios
+- Get all the users with the top performing accounts/portfolios
