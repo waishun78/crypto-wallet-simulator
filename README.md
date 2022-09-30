@@ -13,12 +13,12 @@ Query live crypto trading API for real-time information: https://www.coingecko.c
 
 ## Client Functionalities 
 - Create Accounts
-- Manage Portfolio trades
+- Cryptocurrency Transaction
 - Monitor value of portfolios of particular trades
 - View Cryptocurrency Market Value
 - Sort/Filter Accounts by performance
 
-## Backend Functionalities 
+## Backend Functionalities/Query
 - Create, Read, Update and Delete cryptocurrencies owned (CRUD)
 - Sort/Filter cryptocurrencies owned by value
 - Sort/Filter all cryptocurrencies by value
