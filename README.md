@@ -9,7 +9,7 @@ Stretch goal:
 Query live crypto trading API for real-time information: https://www.coingecko.com/en/api
 
 ## Objects
-![Java Tech](https://user-images.githubusercontent.com/64391406/193386517-2239ba18-c155-4c3a-8b70-253051c63ed8.jpg)
+![Java Tech (1)](https://user-images.githubusercontent.com/64391406/193386591-2b3d74c8-7d52-4176-85e6-dbf4187d5772.jpg)
 Note: accountBalance refers to the money the account has to make cryptocurrency transactions (which defers from the derived value of the portfolio based on market value of cryptocurrencies owned.
 
 ## Client Functionalities 
