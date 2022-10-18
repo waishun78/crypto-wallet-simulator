@@ -27,45 +27,10 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import { visuallyHidden } from '@mui/utils'
 
-// // asynchronous function
-// async function pullJson() {
-//   let response = await fetch(apiURL)
-//   const responseData = await response.json()
-//   console.log(responseData)
-//   return responseData
-// }
+// const apiURL =
+//   'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false'
 
-// const Currency = () => {
-//   // eslint-disable-next-line react-hooks/exhaustive-deps
-//   const [cdata, setCdata] = useState(null)
-
-//   useEffect(() => {
-//     console.log('useEffect called')
-//     const getWeather = async () => {
-//       try {
-//         const res = await axios.get(apiURL)
-//         setCdata(res.data)
-//       } catch (e) {
-//         console.log(e)
-//       }
-//     }
-//     getWeather()
-//   })
-//   console.log(cdata)
-
-//   return (
-//     <CContainer>
-//       {/* <Table {...tableProps} dispatch={dispatch} /> */}
-//       <div>{cdata && cdata.map((data, key) => <div key={key}>{data.id}</div>)}</div>
-//       {/* <h1>{cdata}</h1> */}
-//     </CContainer>
-//   )
-// }
-
-// export default Currency
-
-const apiURL =
-  'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false'
+const apiURL = 'http://localhost:3000/coins'
 
 function createData(name, calories, fat, carbs, protein) {
   return {
@@ -263,7 +228,7 @@ export default function Currency() {
   const [page, setPage] = React.useState(0)
   const [dense, setDense] = React.useState(false)
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
-  const [cdata, setCdata] = useState(null)
+  const [cdata, setCdata] = useState([])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc'
@@ -319,18 +284,10 @@ export default function Currency() {
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0
 
   useEffect(() => {
-    console.log('useEffect called')
-    const getWeather = async () => {
-      try {
-        const res = await axios.get(apiURL)
-        setCdata(res.data)
-      } catch (e) {
-        console.log(e)
-      }
-    }
-    getWeather()
+    fetch(apiURL)
+      .then((response) => response.json())
+      .then((json) => setCdata(json))
   })
-  console.log(cdata)
 
   return (
     <Box sx={{ width: '100%' }}>
