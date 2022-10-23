@@ -23,3 +23,6 @@ Query live crypto trading API for real-time information: https://www.coingecko.c
 - Sort/Filter cryptocurrencies owned by value
 - Sort/Filter all cryptocurrencies by value
 - Get all the users with the top performing accounts/portfolios
+
+## Dev Tools
+json-server --watch ./fakedata.json 
