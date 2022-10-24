@@ -3,7 +3,7 @@ package org.app.domain;
 import java.util.Date;
 
 public class Transaction extends DomainEntity{
-    final Date datePurchased;
+    final Date dateRecord;
 
     // Buy or Sell
     final String transactionType;
@@ -18,8 +18,8 @@ public class Transaction extends DomainEntity{
     final Account account;
     final Portfolio portfolio;
 
-    public Transaction(Date datePurchased, String transactionType, Long cryptocurrencyID, Long transactionAmount, Long currencyQuantity, Account account, Portfolio portfolio) {
-        this.datePurchased = datePurchased;
+    public Transaction(Date dateRecord, String transactionType, Long cryptocurrencyID, Long transactionAmount, Long currencyQuantity, Account account, Portfolio portfolio) {
+        this.dateRecord = dateRecord;
         this.transactionType = transactionType;
         this.cryptocurrencyID = cryptocurrencyID;
         this.transactionAmount = transactionAmount;
@@ -36,13 +36,13 @@ public class Transaction extends DomainEntity{
                 ", transactionAmount='" + transactionAmount + '\'' +
                 ", currencyQuantity='" + currencyQuantity + '\'' +
                 ", transactionType='" + transactionType + '\'' +
-                ", datePurchased='" + datePurchased + '\'' +
+                ", dateRecord='" + dateRecord + '\'' +
                 '}';
     }
 
     /* GETTERS */
     public Date getDatePurchased() {
-        return datePurchased;
+        return dateRecord;
     }
 
     public String getTransactionType() {
