@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 
 import { CContainer } from '@coreui/react'
 
+import { Link } from 'react-router-dom'
+
 import axios from 'axios'
 
 import PropTypes from 'prop-types'
@@ -25,9 +27,9 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Switch from '@mui/material/Switch'
 import DeleteIcon from '@mui/icons-material/Delete'
 import FilterListIcon from '@mui/icons-material/FilterList'
-import { visuallyHidden } from '@mui/utils'
-import ModalF from './ModalF'
+import Button from '@mui/material/Button'
 
+import { visuallyHidden } from '@mui/utils'
 // const apiURL =
 //   'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false'
 
@@ -139,18 +141,12 @@ EnhancedTableHead.propTypes = {
 }
 
 export default function Currency() {
-  const [order, setOrder] = React.useState('asc')
-  const [orderBy, setOrderBy] = React.useState('calories')
-  const [page, setPage] = React.useState(0)
-  const [dense, setDense] = React.useState(false)
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
-  const [cdata, setCdata] = React.useState([])
-  const [showModal, setShowModal] = React.useState(false)
-
-  const setVisible = () => {
-    setShowModal(!showModal)
-    console.log('click')
-  }
+  const [order, setOrder] = useState('asc')
+  const [orderBy, setOrderBy] = useState('calories')
+  const [page, setPage] = useState(0)
+  const [dense, setDense] = useState(false)
+  const [rowsPerPage, setRowsPerPage] = useState(10)
+  const [cdata, setCdata] = useState([])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc'
@@ -158,10 +154,8 @@ export default function Currency() {
     setOrderBy(property)
   }
 
-  const handleClick = (event, name) => {
-    console.log(name)
-    console.log(showModal)
-    setVisible()
+  const handleClick = (event, id) => {
+    console.log('open')
   }
 
   const handleChangePage = (event, newPage) => {
@@ -184,11 +178,10 @@ export default function Currency() {
     fetch(apiURL)
       .then((response) => response.json())
       .then((json) => setCdata(json))
-  })
+  }, [])
 
   return (
     <Box sx={{ width: '100%' }}>
-      {showModal ? <ModalF title={setVisible} /> : null}
       <Paper sx={{ width: '100%', mb: 2 }}>
         <TableContainer>
           <Table
@@ -213,7 +206,7 @@ export default function Currency() {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, row.id)}
                       tabIndex={-1}
                       key={row.name}
                     >
@@ -223,7 +216,11 @@ export default function Currency() {
                       <TableCell align="right">{row.symbol}</TableCell>
                       <TableCell align="right">{row.low_24h}</TableCell>
                       <TableCell align="right">{row.current_price}</TableCell>
-                      <TableCell align="right">{row.total_supply}</TableCell>
+                      <TableCell align="right">
+                        <Link to={`/currencies/purchase/${row.id}`}>
+                          <Button>BUY</Button>
+                        </Link>
+                      </TableCell>
                     </TableRow>
                   )
                 })}

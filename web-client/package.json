@@ -31,6 +31,10 @@
     "@coreui/react": "^4.3.1",
     "@coreui/react-chartjs": "^2.1.0",
     "@coreui/utils": "^1.3.1",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.11",
     "@sunnyag/react-coingecko": "^3.0.0",
     "axios": "^1.1.2",
     "chart.js": "^3.9.1",
@@ -38,6 +42,7 @@
     "coingecko-api": "^1.0.10",
     "core-js": "^3.24.1",
     "ka-table": "^7.6.3",
+    "mui": "^0.0.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-app-polyfill": "^3.0.0",
@@ -46,7 +51,8 @@
     "react-router-dom": "^6.3.0",
     "react-stately": "^3.18.0",
     "redux": "4.2.0",
-    "simplebar-react": "^2.4.1"
+    "simplebar-react": "^2.4.1",
+    "use-http": "^1.0.27"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
