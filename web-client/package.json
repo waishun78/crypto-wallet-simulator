@@ -33,6 +33,7 @@
     "@coreui/utils": "^1.3.1",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@material-ui/icons": "^4.11.3",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.11",
     "@sunnyag/react-coingecko": "^3.0.0",

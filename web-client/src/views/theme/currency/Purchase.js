@@ -2,9 +2,21 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import useFetch from 'use-http'
 
-import Grid2 from '@mui/material/Unstable_Grid2' // Grid version 2
-import Box from '@mui/material/Box'
-import { Button } from '@mui/material'
+import Grid2 from '@mui/material/Unstable_Grid2' // Grid2 version 2
+import { Button, Box, IconButton } from '@mui/material'
+import { styled } from '@mui/material/styles'
+import FormControl from '@mui/material/FormControl'
+import OutlinedInput from '@mui/material/OutlinedInput'
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
+
+const Img = styled('img')({
+  margin: 'auto',
+  display: 'block',
+  maxWidth: '50%',
+  maxHeight: '50%',
+  marginTop: '40px',
+  marginBottom: '40px',
+})
 
 export default function Purchase() {
   const { id } = useParams()
@@ -31,14 +43,14 @@ export default function Purchase() {
   }
 
   // Timer
-  const [countDown, setCountDown] = useState(0)
+  const [countDown, setCountDown] = useState(10)
   const [runTimer, setRunTimer] = useState(true)
 
   useEffect(() => {
     let timerId
 
     if (runTimer) {
-      setCountDown(60 * 5)
+      setCountDown(300)
       timerId = setInterval(() => {
         setCountDown((countDown) => countDown - 1)
       }, 1000)
@@ -57,58 +69,119 @@ export default function Purchase() {
     }
   }, [countDown, runTimer])
 
-  const togglerTimer = () => setRunTimer((t) => !t)
-
   const seconds = String(countDown % 60).padStart(2, 0)
   const minutes = String(Math.floor(countDown / 60)).padStart(2, 0)
 
   return (
     <>
       {/* {cdata[0] && <div>{cdata[0].name}</div>} */}
-      <form className="purchase-coin">
-        <h1>Confirm Purchase</h1>
-        <div className="App">
-          {runTimer ? (
-            <div>
-              Valid for: {minutes}:{seconds}
-            </div>
-          ) : (
-            <buttton type="button" onClick="window.location.reload();">
-              Restart
-            </buttton>
-          )}
-        </div>
-        <Grid2 container spacing={2}>
-          <Grid2 xs={2}></Grid2>
-          <Grid2 xs={8} sx={{ alignContent: 'center' }}>
-            <Box component="span" sx={{ justifyContent: 'center' }}>
-              <Grid2 container spacing={2}>
-                <Grid2 xs={6}>
-                  <img
-                    src="https://freepngimg.com/save/62891-icon-icons-money-computer-save-payment-software/1065x823"
-                    alt="coin_img"
-                  />
-                </Grid2>
-                <Grid2 xs={6}>
-                  <img src={cdata[0] && cdata[0].image} alt="crypt_img" />
-                </Grid2>
-                <Grid2 xs={6}>
-                  <input type="number" onChange={(e) => convertValue(e.target.value)} />
-                </Grid2>
-                <Grid2 xs={6}>{converted} coin</Grid2>
-              </Grid2>
-            </Box>
+      <h1>Confirm Purchase</h1>
+      <Grid2
+        container
+        spacing={2}
+        direction="row"
+        justify="center"
+        justifyContent="center"
+        alignItems="center"
+        alignContent="center"
+      >
+        <Box
+          bgcolor="white"
+          sx={{
+            boxShadow: 3,
+            borderRadius: '10px',
+            width: 7 / 8,
+            mx: 'auto',
+            maxWidth: 2000,
+            mt: 5,
+          }}
+          color="white"
+        >
+          <Grid2
+            container
+            spacing={4}
+            direction="row"
+            justify="center"
+            justifyContent="center"
+            alignItems="center"
+            alignContent="center"
+            textAlign="center"
+          >
+            <Grid2 h1 xs={4}>
+              <Img src="https://cdn-icons-png.flaticon.com/512/3154/3154207.png" alt="coin_img" />
+            </Grid2>
+            <Grid2 h1 xs={2}>
+              <Img
+                src="https://parspng.com/wp-content/uploads/2021/11/arrowpng.parspng.com_.png"
+                alt="arrow_img"
+              />
+            </Grid2>
+            <Grid2 h1 xs={4}>
+              <Img src={cdata[0] && cdata[0].image} alt="crypto_img" />
+            </Grid2>
           </Grid2>
-          <Grid2 xs={2}></Grid2>
-        </Grid2>
-        <h3>
-          Price: 1 {cdata[0] && cdata[0].symbol} = ${cdata[0] && cdata[0].current_price}
-        </h3>
-        <h3>
-          You Receive: {converted} {cdata[0] && cdata[0].symbol}
-        </h3>
-        <input type="submit" value="Submit" />
-      </form>
+        </Box>
+        <Box
+          sx={{
+            width: 11 / 12,
+            mx: 'auto',
+            maxWidth: 2000,
+            mt: 5,
+          }}
+        >
+          <Grid2
+            container
+            spacing={4}
+            direction="row"
+            justify="center"
+            justifyContent="center"
+            alignItems="center"
+            alignContent="center"
+          >
+            <Grid2 xs={6} align="center" justifyContent="center" justifyItems="center">
+              To buy:
+            </Grid2>
+            <Grid2 h1 xs={6} textAlign="right">
+              <FormControl sx={{ width: '25ch' }}>
+                <OutlinedInput
+                  type="number"
+                  placeholder="Please enter amount"
+                  onChange={(e) => convertValue(e.target.value)}
+                />
+              </FormControl>
+            </Grid2>
+            <Grid2 h1 xs={6} align="left">
+              Price:
+            </Grid2>
+            <Grid2 h1 xs={6} textAlign="right">
+              1 {cdata[0] && cdata[0].symbol} = ${cdata[0] && cdata[0].current_price}
+            </Grid2>
+            <Grid2 h1 xs={6} align="left">
+              Your Receive:
+            </Grid2>
+            <Grid2 h1 xs={6} textAlign="right">
+              {converted} {cdata[0] && cdata[0].symbol}
+            </Grid2>
+            <Grid2 h1 xs={12} textAlign="center">
+              {runTimer ? (
+                <div>
+                  Valid for: {minutes}:{seconds}
+                </div>
+              ) : (
+                <Button type="button" onClick={() => window.location.reload()} color="error">
+                  <IconButton color="secondary" aria-label="add an alarm">
+                    <AccessAlarmIcon color="disabled" />
+                  </IconButton>
+                  Refresh
+                </Button>
+              )}
+              <Button type="submit" value="Submit" align="center" disabled={!runTimer}>
+                Submit
+              </Button>
+            </Grid2>
+          </Grid2>
+        </Box>
+      </Grid2>
     </>
   )
 }
