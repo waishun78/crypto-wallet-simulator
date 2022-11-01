@@ -12,6 +12,7 @@ import {
   cilPuzzle,
   cilSpeedometer,
   cilStar,
+  cibQuantopian,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -21,19 +22,15 @@ const _nav = [
     name: 'Dashboard',
     to: '/dashboard',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    },
   },
   {
     component: CNavTitle,
-    name: 'Theme',
+    name: 'Tabs',
   },
   {
     component: CNavItem,
-    name: 'Currencies',
-    to: '/currencies',
+    name: 'Currency',
+    to: '/currency',
     icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
   },
   {
@@ -43,8 +40,8 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'Charts',
-    to: '/charts',
+    name: 'Accounts',
+    to: '/accounts',
     icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
   },
   {
@@ -59,24 +56,26 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'Widgets',
-    to: '/widgets',
-    icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    },
-  },
-  {
-    component: CNavTitle,
-    name: 'Extras',
+    name: 'Portfolios',
+    to: '/portfolios',
+    icon: <CIcon icon={cibQuantopian} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
-    name: 'Docs',
-    href: 'https://coreui.io/react/docs/templates/installation/',
-    icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
+    name: 'Transactions',
+    to: '/transactions',
+    icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
   },
+  // {
+  //   component: CNavTitle,
+  //   name: 'Extras',
+  // },
+  // {
+  //   component: CNavItem,
+  //   name: 'Docs',
+  //   href: 'https://coreui.io/react/docs/templates/installation/',
+  //   icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
+  // },
 ]
 
 export default _nav

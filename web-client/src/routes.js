@@ -1,8 +1,9 @@
 import React from 'react'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
-const Currency = React.lazy(() => import('./views/theme/currency/Currency'))
-const Purchase = React.lazy(() => import('./views/theme/currency/Purchase'))
+const Currency = React.lazy(() => import('./views/currency/Currency'))
+const Purchase = React.lazy(() => import('./views/currency/Purchase'))
+const Portfolios = React.lazy(() => import('./views/portfolios/Portfolios'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -35,7 +36,7 @@ const Range = React.lazy(() => import('./views/forms/range/Range'))
 const Select = React.lazy(() => import('./views/forms/select/Select'))
 const Validation = React.lazy(() => import('./views/forms/validation/Validation'))
 
-const Charts = React.lazy(() => import('./views/charts/Charts'))
+const Accounts = React.lazy(() => import('./views/accounts/Accounts'))
 
 // Icons
 const CoreUIIcons = React.lazy(() => import('./views/icons/coreui-icons/CoreUIIcons'))
@@ -48,13 +49,14 @@ const Badges = React.lazy(() => import('./views/notifications/badges/Badges'))
 const Modals = React.lazy(() => import('./views/notifications/modals/Modals'))
 const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 
-const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
+const Transactions = React.lazy(() => import('./views/transactions/Transactions'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
-  { path: '/currencies', name: 'Currency', element: Currency },
-  { path: '/currencies/purchase/:id', name: 'Purchase Currency', element: Purchase },
+  { path: '/currency', name: 'Currency', element: Currency },
+  { path: '/currency/purchase/:id', name: 'Purchase Currency', element: Purchase },
+  { path: '/portfolios', name: 'Portfolios', element: Portfolios },
 
   { path: '/base', name: 'Base', element: Cards, exact: true },
   { path: '/base/accordion', name: 'Accordion', element: Accordion },
@@ -75,7 +77,7 @@ const routes = [
   { path: '/buttons/buttons', name: 'Buttons', element: Buttons },
   { path: '/buttons/dropdowns', name: 'Dropdowns', element: Dropdowns },
   { path: '/buttons/button-groups', name: 'Button Groups', element: ButtonGroups },
-  { path: '/charts', name: 'Charts', element: Charts },
+  { path: '/accounts', name: 'Accounts', element: Accounts },
   { path: '/forms', name: 'Forms', element: FormControl, exact: true },
   { path: '/forms/form-control', name: 'Form Control', element: FormControl },
   { path: '/forms/select', name: 'Select', element: Select },
@@ -94,7 +96,7 @@ const routes = [
   { path: '/notifications/badges', name: 'Badges', element: Badges },
   { path: '/notifications/modals', name: 'Modals', element: Modals },
   { path: '/notifications/toasts', name: 'Toasts', element: Toasts },
-  { path: '/widgets', name: 'Widgets', element: Widgets },
+  { path: '/transactions', name: 'Transactions', element: Transactions },
 ]
 
 export default routes
