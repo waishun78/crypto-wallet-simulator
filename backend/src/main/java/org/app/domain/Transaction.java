@@ -1,7 +1,6 @@
 package org.app.domain;
 
 import java.util.Date;
-
 public class Transaction extends DomainEntity{
     final Date dateRecord;
 

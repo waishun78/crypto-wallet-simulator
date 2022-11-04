@@ -1,7 +1,11 @@
 package org.app.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public abstract class DomainEntity {
-    //TODO: Generate Uid for each domain entity
+    @Id
     private Long uid;
     public Long getUid(){
         return uid;

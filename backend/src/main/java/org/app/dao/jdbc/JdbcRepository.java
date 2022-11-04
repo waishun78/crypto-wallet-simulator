@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
-public abstract class JdbcRepository<T extends DomainEntity, Long> implements CrudRepository<T, Long> {
+public abstract class JdbcRepository<T extends DomainEntity, Long> implements CrudRepository<T> {
     private DataSource dataSource;
     private Class<T> entityClass;
     protected String tableName;

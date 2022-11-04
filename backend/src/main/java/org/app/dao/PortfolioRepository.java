@@ -4,10 +4,11 @@ import org.app.domain.Account;
 import org.app.domain.Portfolio;
 import org.app.domain.Transaction;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 
 public interface PortfolioRepository extends CrudRepository<Portfolio>{
-    Number findQuantityOwnedbyID(Long currencyID);
-    Map<Date, Number> findPortfolioHistory(Date startDate, Date endDate);
+    // Find the portoflios that own a certain cruptocurrency ID
+    Collection<Long> findPortfolioOwningID(Long currencyID);
 }
