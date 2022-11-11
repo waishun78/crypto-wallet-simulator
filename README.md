@@ -26,3 +26,7 @@ Note: accountBalance refers to the money the account has to make cryptocurrency 
 ### Stretch Goal
 - Sort/Filter cryptocurrencies owned by value
 - Sort/Filter all cryptocurrencies by value
+- Get all the users with the top performing accounts/portfolios
+
+## Dev Tools
+json-server --watch ./fakedata.json 
