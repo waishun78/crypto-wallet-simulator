@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,9 +18,25 @@ public class AssetController {
     @Autowired
     private AssetRepository assetRepository;
 
+    /**
+     *
+     * @param username / else all users is assumed
+     * @return List<Asset> belonging to username
+     */
     @GetMapping
-    public List<Asset> getAllAssets(){
-        return assetRepository.findAll();
+    public List<Asset> getFilteredAssetByUsername(@RequestParam(value="username", required = false) String username){
+
+        List<Asset> fullList = assetRepository.findAll();
+        if (username == null){
+            return fullList;
+        }
+        List<Asset> filteredList = new ArrayList<>();
+        for (Asset a : fullList){
+            if (a.getAccount().getUsername().equalsIgnoreCase(username)){
+                filteredList.add(a);
+            }
+        }
+        return filteredList;
     }
 
     // create asset REST API

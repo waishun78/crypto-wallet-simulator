@@ -37,6 +37,7 @@ const Select = React.lazy(() => import('./views/forms/select/Select'))
 const Validation = React.lazy(() => import('./views/forms/validation/Validation'))
 
 const Accounts = React.lazy(() => import('./views/accounts/Accounts'))
+const Account = React.lazy(() => import('./views/accounts/Account'))
 
 // Icons
 const CoreUIIcons = React.lazy(() => import('./views/icons/coreui-icons/CoreUIIcons'))
@@ -78,6 +79,8 @@ const routes = [
   { path: '/buttons/dropdowns', name: 'Dropdowns', element: Dropdowns },
   { path: '/buttons/button-groups', name: 'Button Groups', element: ButtonGroups },
   { path: '/accounts', name: 'Accounts', element: Accounts },
+  { path: '/accounts/account/:id', name: 'Account', element: Account },
+
   { path: '/forms', name: 'Forms', element: FormControl, exact: true },
   { path: '/forms/form-control', name: 'Form Control', element: FormControl },
   { path: '/forms/select', name: 'Select', element: Select },

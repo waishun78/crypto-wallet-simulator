@@ -33,7 +33,7 @@ import { visuallyHidden } from '@mui/utils'
 // const apiURL =
 //   'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false'
 
-const apiURL = 'http://localhost:3000/coins'
+const apiURL = 'http://localhost:8080/api/v1/accounts'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -67,34 +67,22 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'name',
+    id: 'username',
     numeric: false,
     disablePadding: false,
-    label: 'Name',
+    label: 'username',
   },
   {
-    id: 'symbol',
+    id: 'Notes',
     numeric: true,
     disablePadding: false,
     label: 'Symbol',
   },
   {
-    id: 'low_24h',
+    id: 'Account Balance',
     numeric: true,
     disablePadding: false,
-    label: '24H Low (USD)',
-  },
-  {
-    id: 'current_price',
-    numeric: true,
-    disablePadding: false,
-    label: 'Current Price (USD)',
-  },
-  {
-    id: 'total_supply',
-    numeric: true,
-    disablePadding: false,
-    label: 'Total Supply',
+    label: 'Account Balance(USD)',
   },
 ]
 
@@ -148,6 +136,8 @@ export default function Accounts() {
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [cdata, setCdata] = useState([])
 
+  console.log(cdata)
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc'
     setOrder(isAsc ? 'desc' : 'asc')
@@ -183,7 +173,6 @@ export default function Accounts() {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <h1>TO UPDATE</h1>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -212,14 +201,14 @@ export default function Accounts() {
                       key={row.name}
                     >
                       <TableCell component="th" id={labelId} scope="row">
-                        {row.name}
+                        {row.id}
                       </TableCell>
-                      <TableCell align="right">{row.symbol}</TableCell>
-                      <TableCell align="right">{row.low_24h}</TableCell>
+                      <TableCell align="right">{row.notes}</TableCell>
+                      <TableCell align="right">{row.accountBalance}</TableCell>
                       <TableCell align="right">{row.current_price}</TableCell>
                       <TableCell align="right">
-                        <Link to={`/currency/purchase/${row.id}`}>
-                          <Button>BUY</Button>
+                        <Link to={`/accounts/account/${row.id}`}>
+                          <Button variant="contained">GO TO ADMIN</Button>
                         </Link>
                       </TableCell>
                     </TableRow>

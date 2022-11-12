@@ -2,6 +2,7 @@ package com.appbackend.appbackend.controller;
 
 import com.appbackend.appbackend.exception.ResourceNotFoundException;
 import com.appbackend.appbackend.model.Account;
+import com.appbackend.appbackend.model.Asset;
 import com.appbackend.appbackend.model.Snapshot;
 import com.appbackend.appbackend.repository.AccountRepository;
 import com.appbackend.appbackend.repository.SnapshotRepository;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,8 +22,18 @@ public class SnapshotController {
     private SnapshotRepository snapshotRepository;
 
     @GetMapping
-    public List<Snapshot> getAllSnapshots(){
-        return snapshotRepository.findAll();
+    public List<Snapshot> getFilteredSnapshotsByUsername(@RequestParam(value="username", required = false) String username){
+        List<Snapshot> fullList = snapshotRepository.findAll();
+        if (username == null){
+            return fullList;
+        }
+        List<Snapshot> filteredList = new ArrayList<>();
+        for (Snapshot s : fullList){
+            if (s.getAccount().getUsername().equalsIgnoreCase(username)){
+                filteredList.add(s);
+            }
+        }
+        return filteredList;
     }
 
     // create snapshot REST API

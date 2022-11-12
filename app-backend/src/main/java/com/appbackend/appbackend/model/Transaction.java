@@ -19,7 +19,13 @@ public class Transaction implements DomainEntity<Long> {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long transactionId;
 
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    // Might be username
+    private Account account;
+
     private Long cryptoId;
+    private String cryptoName;
     // Cost of one cryptocurrency unit in USD
     private Double exchangeRate;
     // Can be positive for buying and negative for selling

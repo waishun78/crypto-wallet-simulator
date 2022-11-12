@@ -1,6 +1,7 @@
 package com.appbackend.appbackend.controller;
 
 import com.appbackend.appbackend.exception.ResourceNotFoundException;
+import com.appbackend.appbackend.model.Asset;
 import com.appbackend.appbackend.model.Transaction;
 import com.appbackend.appbackend.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,8 +20,18 @@ public class TransactionController {
     private TransactionRepository transactionRepository;
 
     @GetMapping
-    public List<Transaction> getAllTransactions(){
-        return transactionRepository.findAll();
+    public List<Transaction> getFilteredTransactionsByUsername(@RequestParam(value="username", required = false) String username){
+        List<Transaction> fullList = transactionRepository.findAll();
+        if (username == null){
+            return fullList;
+        }
+        List<Transaction> filteredList = new ArrayList<>();
+        for (Transaction t : fullList){
+            if (t.getAccount().getUsername().equalsIgnoreCase(username)){
+                filteredList.add(t);
+            }
+        }
+        return filteredList;
     }
 
     // create transaction REST API
