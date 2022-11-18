@@ -23,6 +23,7 @@ public class AccountController {
     }
 
     // create account REST API
+    // TODO: Way to assign a username to the creation, instead of including the entire mapping into the account
     @PostMapping
     public Account createAccount(@RequestBody Account account){
         return accountRepository.save(account);
@@ -41,12 +42,13 @@ public class AccountController {
     public ResponseEntity<Account> updateAccount(@PathVariable String username, @RequestBody Account accountDetails){
         Account accountToUpdate = accountRepository.findById(username)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Employee %s does not exist","username")));
-        accountToUpdate.setUsername(accountDetails.getUsername());
-        accountToUpdate.setAccountBalance(accountDetails.getAccountBalance());
-        accountToUpdate.setNotes(accountDetails.getNotes());
-
+        if (accountDetails.getAccountBalance() != null){
+            accountToUpdate.setAccountBalance(accountDetails.getAccountBalance());
+        }
+        if (accountDetails.getNotes() != null){
+            accountToUpdate.setNotes(accountDetails.getNotes());
+        }
         accountRepository.save(accountToUpdate);
-
         return ResponseEntity.ok(accountToUpdate);
     }
 

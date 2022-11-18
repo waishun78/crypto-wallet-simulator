@@ -1,5 +1,6 @@
 package com.appbackend.appbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,7 +33,7 @@ public class Snapshot implements DomainEntity<Long> {
     @CreationTimestamp
     private Date snapshotTime;
 
-
+    @JsonIgnore
     @Override
     public Long getId() {
         return this.snapshotId;

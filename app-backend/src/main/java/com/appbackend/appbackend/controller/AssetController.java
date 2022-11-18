@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -39,6 +40,22 @@ public class AssetController {
         return filteredList;
     }
 
+    @DeleteMapping
+    public ResponseEntity<Collection<Asset>> deleteByAccount(@RequestParam(value="username", required = false) String username){
+
+        List<Asset> fullList = assetRepository.findAll();
+        if (username == null){
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
+        List<Asset> filteredList = new ArrayList<>();
+        for (Asset a : fullList){
+            if (a.getAccount().getUsername().equalsIgnoreCase(username)){
+                assetRepository.delete(a);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
     // create asset REST API
     @PostMapping
     public Asset createAsset(@RequestBody Asset asset){
@@ -58,9 +75,18 @@ public class AssetController {
     public ResponseEntity<Asset> updateAsset(@PathVariable Long id, @RequestBody Asset assetDetails){
         Asset assetToUpdate = assetRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Asset %d does not exist","id")));
-        assetToUpdate.setQuantity(124.4);
-        assetToUpdate.setCryptoId(Long.valueOf(214335));
-        assetToUpdate.setAccount(assetDetails.getAccount());
+        if (assetDetails.getQuantity() != null) {
+            assetToUpdate.setQuantity(assetDetails.getQuantity());
+        }
+        if (assetDetails.getCryptoId() != null){
+            assetToUpdate.setCryptoId(assetDetails.getCryptoId());
+        }
+        if (assetDetails.getCryptoName() != null){
+            assetToUpdate.setCryptoName(assetDetails.getCryptoName());
+        }
+        if (assetDetails.getAccount() != null){
+            assetToUpdate.setAccount(assetDetails.getAccount());
+        }
 
         assetRepository.save(assetDetails);
 
@@ -75,6 +101,6 @@ public class AssetController {
 
         assetRepository.delete(asset);
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     };
 }

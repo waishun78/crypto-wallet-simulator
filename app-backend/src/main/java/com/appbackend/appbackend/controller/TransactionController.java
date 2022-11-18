@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -40,6 +41,22 @@ public class TransactionController {
         return transactionRepository.save(transaction);
     }
 
+    @DeleteMapping
+    public ResponseEntity<Collection<Transaction>> deleteByAccount(@RequestParam(value="username", required = false) String username){
+
+        List<Transaction> fullList = transactionRepository.findAll();
+        if (username == null){
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
+        List<Asset> filteredList = new ArrayList<>();
+        for (Transaction t : fullList){
+            if (t.getAccount().getUsername().equalsIgnoreCase(username)){
+                transactionRepository.delete(t);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
     //get transaction by id REST API
     @GetMapping("{id}")
     public ResponseEntity<Transaction> getTransactionById(@PathVariable Long id){
@@ -53,10 +70,18 @@ public class TransactionController {
     public ResponseEntity<Transaction> updateTransaction(@PathVariable Long id, @RequestBody Transaction transactionDetails){
         Transaction transactionToUpdate = transactionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Transaction %d does not exist","id")));
-        transactionToUpdate.setQuantityTransacted(transactionDetails.getQuantityTransacted());
-        transactionToUpdate.setCryptoId(transactionDetails.getCryptoId());
-        transactionToUpdate.setExchangeRate(transactionDetails.getExchangeRate());
-
+        if (transactionDetails.getQuantityTransacted() != null) {
+            transactionToUpdate.setQuantityTransacted(transactionDetails.getQuantityTransacted());
+        }
+        if (transactionDetails.getCryptoId() != null){
+            transactionToUpdate.setCryptoId(transactionDetails.getCryptoId());
+        }
+        if (transactionDetails.getCryptoName() != null){
+            transactionToUpdate.setCryptoName(transactionDetails.getCryptoName());
+        }
+        if (transactionDetails.getExchangeRate() != null){
+            transactionToUpdate.setExchangeRate(transactionDetails.getExchangeRate());
+        }
         transactionRepository.save(transactionToUpdate);
 
         return ResponseEntity.ok(transactionToUpdate);

@@ -1,5 +1,6 @@
 package com.appbackend.appbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,7 +29,7 @@ public class Asset implements DomainEntity<Long> {
     private String cryptoName;
     private Double quantity;
 
-
+    @JsonIgnore
     @Override
     public Long getId() {
         return this.assetId;

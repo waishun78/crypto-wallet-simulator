@@ -30,10 +30,10 @@ import FilterListIcon from '@mui/icons-material/FilterList'
 import Button from '@mui/material/Button'
 
 import { visuallyHidden } from '@mui/utils'
-// const apiURL =
-//   'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false'
+const apiURL =
+  'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false'
 
-const apiURL = 'http://localhost:3000/coins'
+// const apiURL = 'http://localhost:3000/coins'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {

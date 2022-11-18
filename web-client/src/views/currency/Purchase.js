@@ -20,7 +20,8 @@ const Img = styled('img')({
 
 export default function Purchase() {
   const { id } = useParams()
-  const apiURL = 'http://localhost:3000/coins'
+  const apiURL =
+    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=fals'
   var queryURL = apiURL + '?id=' + id
 
   // Retrieve Currency Data

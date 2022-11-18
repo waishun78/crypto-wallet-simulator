@@ -301,8 +301,6 @@ export default function Accounts() {
       .then((json) => setTransactiondata(json))
   }, [])
 
-  console.log(transactiondata)
-
   return (
     <Box sx={{ width: '100%' }}>
       <h1>Assets</h1>

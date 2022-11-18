@@ -196,18 +196,18 @@ export default function Accounts() {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.id)}
+                      onClick={(event) => handleClick(event, row.username)}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.username}
                     >
                       <TableCell component="th" id={labelId} scope="row">
-                        {row.id}
+                        {row.username}
                       </TableCell>
                       <TableCell align="right">{row.notes}</TableCell>
                       <TableCell align="right">{row.accountBalance}</TableCell>
                       <TableCell align="right">{row.current_price}</TableCell>
                       <TableCell align="right">
-                        <Link to={`/accounts/account/${row.id}`}>
+                        <Link to={`/accounts/account/${row.username}`}>
                           <Button variant="contained">GO TO ADMIN</Button>
                         </Link>
                       </TableCell>

@@ -1,5 +1,6 @@
 package com.appbackend.appbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,7 @@ public class Transaction implements DomainEntity<Long> {
     // Can be positive for buying and negative for selling
     private Double quantityTransacted;
 
+    @JsonIgnore
     @Override
     public Long getId() {
         return this.transactionId;

@@ -55,11 +55,16 @@ public class SnapshotController {
     public ResponseEntity<Snapshot> updateSnapshot(@PathVariable Long id, @RequestBody Snapshot snapshotDetails){
         Snapshot snapshotToUpdate = snapshotRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Employee %d does not exist","id")));
-        snapshotToUpdate.setAccount(snapshotDetails.getAccount());
-        snapshotToUpdate.setSnapshotTime(snapshotDetails.getSnapshotTime());
-        snapshotToUpdate.setAccountBalance(snapshotDetails.getAccountBalance());
-        snapshotToUpdate.setAssetValue(snapshotDetails.getAssetValue());
 
+        if (snapshotDetails.getSnapshotTime() != null){
+            snapshotToUpdate.setSnapshotTime(snapshotDetails.getSnapshotTime());
+        }
+        if (snapshotDetails.getAccountBalance() != null){
+            snapshotToUpdate.setAccountBalance(snapshotDetails.getAccountBalance());
+        }
+        if (snapshotDetails.getAssetValue()!= null){
+            snapshotToUpdate.setAssetValue(snapshotDetails.getAssetValue());
+        }
         snapshotRepository.save(snapshotToUpdate);
 
         return ResponseEntity.ok(snapshotToUpdate);
