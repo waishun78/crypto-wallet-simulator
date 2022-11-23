@@ -26,7 +26,7 @@ import Tooltip from '@mui/material/Tooltip'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Switch from '@mui/material/Switch'
 import DeleteIcon from '@mui/icons-material/Delete'
-import FilterListIcon from '@mui/icons-material/FilterList'
+import AddBoxIcon from '@material-ui/icons/AddBox'
 import Button from '@mui/material/Button'
 
 import { visuallyHidden } from '@mui/utils'
@@ -172,6 +172,12 @@ export default function Accounts() {
 
   return (
     <Box sx={{ width: '100%' }}>
+      <Link to={`account/add`}>
+        <Button>
+          <AddBoxIcon>Icon</AddBoxIcon>
+          Add Account
+        </Button>
+      </Link>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <TableContainer>
           <Table
@@ -236,10 +242,6 @@ export default function Accounts() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
     </Box>
   )
 }

@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/transactions")
 public class TransactionController {
 

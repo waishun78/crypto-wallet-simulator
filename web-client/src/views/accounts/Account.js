@@ -240,13 +240,14 @@ export default function Accounts() {
   const [assetdata, setAssetdata] = useState([])
   const [transactiondata, setTransactiondata] = useState([])
 
-  const { id } = useParams()
+  const { username } = useParams()
+  console.log(username)
 
   const transactionApiURL = 'http://localhost:8080/api/v1/transactions'
-  var querytransactionApiURL = transactionApiURL + '?username=' + id
+  var querytransactionApiURL = transactionApiURL + '?username=' + username
 
   const assetApiURL = 'http://localhost:8080/api/v1/assets'
-  var queryassetApiURL = assetApiURL + '?username=' + id
+  var queryassetApiURL = assetApiURL + '?username=' + username
 
   /* FOR ASSETS */
   const assetHandleRequestSort = (event, property) => {
@@ -301,9 +302,19 @@ export default function Accounts() {
       .then((json) => setTransactiondata(json))
   }, [])
 
+  const deleteAccount = () => {
+    axios.delete('http://localhost:8080/api/v1/accounts/' + username)
+  }
+
   return (
     <Box sx={{ width: '100%' }}>
+      <Button>
+        <Link to={`/accounts/${username}`}>Edit Account</Link>
+      </Button>
       <h1>Assets</h1>
+      <Button>
+        <Link to={`/currency/`}>Buy</Link>
+      </Button>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <TableContainer>
           <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size="medium">
@@ -396,11 +407,6 @@ export default function Accounts() {
                       <TableCell component="th" id={labelId} scope="row" align="right">
                         {row.quantity}
                       </TableCell>
-                      {/* <TableCell align="right">
-                        <Link to={`/currency/purchase/${row.id}`}>
-                          <Button variant="contained">GO TO ADMIN</Button>
-                        </Link>
-                      </TableCell> */}
                     </TableRow>
                   )
                 })}
@@ -426,6 +432,9 @@ export default function Accounts() {
           onRowsPerPageChange={tHandleChangeRowsPerPage}
         />
       </Paper>
+      <Button onClick={deleteAccount} variant="contained" color="error">
+        Delete Account
+      </Button>
     </Box>
   )
 }

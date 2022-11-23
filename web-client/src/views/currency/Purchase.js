@@ -139,6 +139,22 @@ export default function Purchase() {
             alignItems="center"
             alignContent="center"
           >
+            {/* <Grid2 h1 xs={12}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Age"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid2> */}
             <Grid2 h1 xs={6} align="left">
               Price:
             </Grid2>

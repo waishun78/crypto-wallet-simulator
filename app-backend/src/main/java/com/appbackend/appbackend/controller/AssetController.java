@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/assets")
 public class AssetController {
 
