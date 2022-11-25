@@ -9,6 +9,9 @@ import FormControl from '@mui/material/FormControl'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
 
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
+
 const Img = styled('img')({
   margin: 'auto',
   display: 'block',
@@ -24,13 +27,24 @@ export default function Purchase() {
     'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=fals'
   var queryURL = apiURL + '?id=' + id
 
+  const accountsQueryURL = 'http://localhost:8080/api/v1/accounts'
+
   // Retrieve Currency Data
   const [cdata, setCdata] = useState([])
+  const [accountData, setAccountData] = useState([])
+
   // TODO: Prevent refresh from timer dependency useEffect
   useEffect(() => {
     fetch(queryURL)
       .then((response) => response.json())
       .then((json) => setCdata(json))
+  }, [])
+
+  const [accountChoice, setAccountChoice] = useState('Invalid Account')
+  useEffect(() => {
+    fetch(accountsQueryURL)
+      .then((response) => response.json())
+      .then((json) => setAccountData(json))
   }, [])
   console.log(queryURL)
   console.log(id)
@@ -73,10 +87,29 @@ export default function Purchase() {
   const seconds = String(countDown % 60).padStart(2, 0)
   const minutes = String(Math.floor(countDown / 60)).padStart(2, 0)
 
+  const handleChange = (event) => {
+    setAccountChoice(event.target.value)
+  }
+
   return (
     <>
       {/* {cdata[0] && <div>{cdata[0].name}</div>} */}
       <h1>Confirm Purchase</h1>
+      <Select
+        labelId="accountChoice"
+        id="accountChoice"
+        value={accountChoice}
+        label="Account"
+        onChange={handleChange}
+      >
+        {accountData.map((row, index) => {
+          return (
+            <MenuItem value={row.username} key={row.username}>
+              {row.username}
+            </MenuItem>
+          )
+        })}
+      </Select>
       <Grid2
         container
         spacing={2}
@@ -139,22 +172,6 @@ export default function Purchase() {
             alignItems="center"
             alignContent="center"
           >
-            {/* <Grid2 h1 xs={12}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={age}
-                  label="Age"
-                  onChange={handleChange}
-                >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid2> */}
             <Grid2 h1 xs={6} align="left">
               Price:
             </Grid2>
