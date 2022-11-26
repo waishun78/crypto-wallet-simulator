@@ -43,6 +43,7 @@ public class AccountController {
     public ResponseEntity<Account> updateAccount(@PathVariable String username, @RequestBody Account accountDetails){
         Account accountToUpdate = accountRepository.findById(username)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Employee %s does not exist","username")));
+        //TODO: Move this to service layer
         if (accountDetails.getAccountBalance() != null){
             accountToUpdate.setAccountBalance(accountDetails.getAccountBalance());
         }

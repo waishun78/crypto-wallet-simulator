@@ -12,6 +12,8 @@ import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
 
+import axios from 'axios'
+
 const Img = styled('img')({
   margin: 'auto',
   display: 'block',
@@ -91,6 +93,40 @@ export default function Purchase() {
     setAccountChoice(event.target.value)
   }
 
+  const makeTransaction = (event, account, cdata, converted) => {
+    // Compare the account for its indformation and check whether it has enough currency
+    var amount_needed = cdata[0].current_price * converted
+    for (var i = 0; i < accountData.length; i++) {
+      console.log(i)
+      if (accountData[i]['username'] === account) {
+        var amount_owned = accountData[i]['accountBalance']
+      }
+    }
+    if (amount_owned >= amount_needed) {
+      // ENOUGH MONEY - Create asset OR update asset with new quantity
+      var assetQueryURl = 'http://localhost:8080/api/v1/assets?username=' + account
+      var assets = fetch(assetQueryURl).then((response) => response.json())
+      //TODO: Find exsiting asset if it exists and create if no corresponding asset
+      // CHEAT METHOD: Just create asset
+      var assetCreatURL = 'http://localhost:8080/api/v1/assets'
+      console.log({
+        account: account,
+        crypto_id: id,
+        crypto_name: cdata,
+        quantity: converted,
+      })
+      axios.post(assetCreatURL, {
+        account: account,
+        crypto_id: id,
+        crypto_name: id,
+        quantity: converted,
+      })
+    } else {
+      // NOT ENOUGH MONEY
+      window.alert('Insufficient Funds')
+    }
+  }
+
   return (
     <>
       {/* {cdata[0] && <div>{cdata[0].name}</div>} */}
@@ -105,7 +141,8 @@ export default function Purchase() {
         {accountData.map((row, index) => {
           return (
             <MenuItem value={row.username} key={row.username}>
-              {row.username}
+              <div>Username: {row.username}</div>
+              <div>Account Balance: {row.accountBalance}</div>
             </MenuItem>
           )
         })}
@@ -209,7 +246,13 @@ export default function Purchase() {
                   Refresh
                 </Button>
               )}
-              <Button type="submit" value="Submit" align="center" disabled={!runTimer}>
+              <Button
+                type="submit"
+                value="Submit"
+                align="center"
+                disabled={!runTimer}
+                onClick={(event) => makeTransaction(event, accountChoice, cdata, converted)}
+              >
                 Submit
               </Button>
             </Grid2>

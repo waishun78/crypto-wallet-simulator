@@ -8,11 +8,11 @@ import javax.persistence.*;
 public class AssetDto {
     private Long assetId;
     private String account;
-    private Long cryptoId;
+    private String cryptoId;
     private String cryptoName;
     private Double quantity;
 
-    public AssetDto(Long assetId, String account, Long cryptoId, String cryptoName, Double quantity) {
+    public AssetDto(Long assetId, String account, String cryptoId, String cryptoName, Double quantity) {
         this.assetId = assetId;
         this.account = account;
         this.cryptoId = cryptoId;
@@ -36,11 +36,11 @@ public class AssetDto {
         this.account = account;
     }
 
-    public Long getCryptoId() {
+    public String getCryptoId() {
         return cryptoId;
     }
 
-    public void setCryptoId(Long cryptoId) {
+    public void setCryptoId(String cryptoId) {
         this.cryptoId = cryptoId;
     }
 

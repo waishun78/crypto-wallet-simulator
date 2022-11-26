@@ -25,7 +25,7 @@ public class Asset implements DomainEntity<Long> {
     // Might be username
     private Account account;
 
-    private Long cryptoId;
+    private String cryptoId;
     private String cryptoName;
     private Double quantity;
 
