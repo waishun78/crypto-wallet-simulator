@@ -1,9 +1,4 @@
-package com.appbackend.appbackend.controller.model;
-
-import com.appbackend.appbackend.model.Account;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
+package com.appbackend.appbackend.controller.model_archived;
 
 public class AssetDto {
     private Long assetId;

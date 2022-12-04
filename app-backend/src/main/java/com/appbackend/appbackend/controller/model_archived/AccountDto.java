@@ -1,10 +1,5 @@
-package com.appbackend.appbackend.controller.model;
+package com.appbackend.appbackend.controller.model_archived;
 
-import com.appbackend.appbackend.model.Asset;
-import com.appbackend.appbackend.model.Snapshot;
-import com.appbackend.appbackend.model.Transaction;
-
-import javax.persistence.OneToMany;
 import java.util.Collection;
 
 public class AccountDto {

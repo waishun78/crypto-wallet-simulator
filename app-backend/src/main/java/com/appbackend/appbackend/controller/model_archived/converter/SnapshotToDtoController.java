@@ -1,6 +1,6 @@
-package com.appbackend.appbackend.controller.model.converter;
+package com.appbackend.appbackend.controller.model_archived.converter;
 
-import com.appbackend.appbackend.controller.model.SnapshotDto;
+import com.appbackend.appbackend.controller.model_archived.SnapshotDto;
 import com.appbackend.appbackend.model.Snapshot;
 
 import java.util.function.Function;

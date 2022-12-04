@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "assets")
-public class Asset implements DomainEntity<Long> {
+public class Asset implements DomainEntity<Long>, Serializable {
     @Id
     @Column(name = "assetId")
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -22,7 +23,6 @@ public class Asset implements DomainEntity<Long> {
 
     @ManyToOne
     @JoinColumn(name = "accountId")
-    // Might be username
     private Account account;
 
     private String cryptoId;

@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Getter
@@ -16,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "snapshots")
-public class Snapshot implements DomainEntity<Long> {
+public class Snapshot implements DomainEntity<Long>, Serializable {
     @Id
     @Column(name = "snapshotId")
     @GeneratedValue(strategy=GenerationType.AUTO)

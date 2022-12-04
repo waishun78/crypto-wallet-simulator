@@ -1,10 +1,5 @@
-package com.appbackend.appbackend.controller.model;
+package com.appbackend.appbackend.controller.model_archived;
 
-import com.appbackend.appbackend.model.Account;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.CreationTimestamp;
-
-import javax.persistence.*;
 import java.util.Date;
 
 public class SnapshotDto {

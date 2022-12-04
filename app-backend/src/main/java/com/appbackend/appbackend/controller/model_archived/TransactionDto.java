@@ -1,19 +1,15 @@
-package com.appbackend.appbackend.controller.model;
-
-import com.appbackend.appbackend.model.Account;
-
-import javax.persistence.*;
+package com.appbackend.appbackend.controller.model_archived;
 
 public class TransactionDto {
 
     private Long transactionId;
     private String account;
-    private Long cryptoId;
+    private String cryptoId;
     private String cryptoName;
     private Double exchangeRate;
     private Double quantityTransacted;
 
-    public TransactionDto(Long transactionId, String account, Long cryptoId, String cryptoName, Double exchangeRate, Double quantityTransacted) {
+    public TransactionDto(Long transactionId, String account, String cryptoId, String cryptoName, Double exchangeRate, Double quantityTransacted) {
         this.transactionId = transactionId;
         this.account = account;
         this.cryptoId = cryptoId;
@@ -38,11 +34,11 @@ public class TransactionDto {
         this.account = account;
     }
 
-    public Long getCryptoId() {
+    public String getCryptoId() {
         return cryptoId;
     }
 
-    public void setCryptoId(Long cryptoId) {
+    public void setCryptoId(String cryptoId) {
         this.cryptoId = cryptoId;
     }
 

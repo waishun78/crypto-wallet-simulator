@@ -1,6 +1,6 @@
-package com.appbackend.appbackend.controller.model.converter;
+package com.appbackend.appbackend.controller.model_archived.converter;
 
-import com.appbackend.appbackend.controller.model.TransactionDto;
+import com.appbackend.appbackend.controller.model_archived.TransactionDto;
 import com.appbackend.appbackend.model.Transaction;
 
 import java.util.function.Function;

@@ -309,7 +309,7 @@ export default function Accounts() {
   return (
     <Box sx={{ width: '100%' }}>
       <Button>
-        <Link to={`/accounts/${username}`}>Edit Account</Link>
+        <Link to={`/accounts/update/${username}`}>Edit Account</Link>
       </Button>
       <h1>Assets</h1>
       <Button>

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 @Getter
@@ -15,18 +16,18 @@ import java.util.Collection;
 @AllArgsConstructor
 @Entity
 @Table(name = "accounts")
-public class Account implements DomainEntity<String> {
+public class Account implements DomainEntity<String>, Serializable {
     @Id
     @Column(name = "username")
     private String username;
     private String notes;
     private Double accountBalance;
 
-//    @OneToMany(mappedBy = "account")
+//    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private Collection<Asset> assets;
-//    @OneToMany(mappedBy = "account")
+//    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private Collection<Snapshot> snapshots;
-//    @OneToMany(mappedBy = "account")
+//    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private Collection<Transaction> transactions;
 
     public Account(String username){

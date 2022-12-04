@@ -1,18 +1,8 @@
 package com.appbackend.appbackend.business;
-
-/*
- * Project Social Network. Created for Java Technology course at Czech Technical University in Prague,
- * Faculty of Information Technology.
- *
- * Author: Ondřej Guth (ondrej.guth@fit.cvut.cz)
- *
- * This code is intended for educational purposes only.
- */
-
 import java.util.Optional;
 
+import com.appbackend.appbackend.exception.EntityStateException;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.appbackend.appbackend.model.DomainEntity;
 
 /**
@@ -38,8 +28,8 @@ public abstract class AbstractCrudService<E extends DomainEntity<ID>, ID> {
      * @throws EntityStateException if an entity with the same key is already stored
      */
     public E create(E entity) throws IllegalArgumentException {
-        if (repository.existsById(entity.getId()))
-            throw new IllegalArgumentException("entity " + entity + " already exists");
+//        if (repository.existsById(entity.getId()))
+//            throw new IllegalArgumentException("entity " + entity + " already exists");
         return repository.save(entity); //delegate call to data layer
     }
 

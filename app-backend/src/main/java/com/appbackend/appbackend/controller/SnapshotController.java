@@ -1,10 +1,7 @@
 package com.appbackend.appbackend.controller;
 
 import com.appbackend.appbackend.exception.ResourceNotFoundException;
-import com.appbackend.appbackend.model.Account;
-import com.appbackend.appbackend.model.Asset;
 import com.appbackend.appbackend.model.Snapshot;
-import com.appbackend.appbackend.repository.AccountRepository;
 import com.appbackend.appbackend.repository.SnapshotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
