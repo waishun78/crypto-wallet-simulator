@@ -205,7 +205,7 @@ export default function Accounts() {
                         <TableCell align="right">{row.current_price}</TableCell>
                         <TableCell align="right">
                           <Link to={`/accounts/account/${row.username}`}>
-                            <Button variant="contained">GO TO ADMIN</Button>
+                            <Button>Admin</Button>
                           </Link>
                         </TableCell>
                       </TableRow>

@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import useFetch from 'use-http'
-
-import axios from 'axios'
 
 import Timer from './PurchaseComponents/Timer'
 import AccountSelector from './PurchaseComponents/AccountSelector'

@@ -84,10 +84,10 @@ const headCells = [
     label: 'Current Price (USD)',
   },
   {
-    id: 'total_supply',
+    id: '',
     numeric: true,
     disablePadding: false,
-    label: 'Total Supply',
+    label: '',
   },
 ]
 

@@ -8,6 +8,7 @@ const Account = React.lazy(() => import('./views/accounts/Account'))
 const AddAccount = React.lazy(() => import('./views/accounts/AddAccount'))
 const UpdateAccount = React.lazy(() => import('./views/accounts/UpdateAccount'))
 const Transactions = React.lazy(() => import('./views/transactions/Transactions'))
+const Sell = React.lazy(() => import('./views/accounts/Sell'))
 
 // // Base
 // const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -60,6 +61,7 @@ const routes = [
   { path: '/accounts/account/add', name: 'AddAccount', element: AddAccount },
   { path: '/accounts/update/:username', name: 'UpdateAccount', element: UpdateAccount },
   { path: '/transactions', name: 'Transactions', element: Transactions },
+  { path: '/accounts/account/:username/sell', name: 'Sell Asset', element: Sell },
 
   // { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   // { path: '/base', name: 'Base', element: Cards, exact: true },

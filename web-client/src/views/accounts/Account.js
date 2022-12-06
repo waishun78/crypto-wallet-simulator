@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-
-import { CContainer } from '@coreui/react'
-
 import { Link } from 'react-router-dom'
 
 import axios from 'axios'
-
+import Grid2 from '@mui/material/Unstable_Grid2' // Grid2 version 2
 import PropTypes from 'prop-types'
-import { alpha } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -18,16 +14,7 @@ import TableHead from '@mui/material/TableHead'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import TableSortLabel from '@mui/material/TableSortLabel'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
-import Checkbox from '@mui/material/Checkbox'
-import IconButton from '@mui/material/IconButton'
-import Tooltip from '@mui/material/Tooltip'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Switch from '@mui/material/Switch'
-import DeleteIcon from '@mui/icons-material/Delete'
-import FilterListIcon from '@mui/icons-material/FilterList'
 import Button from '@mui/material/Button'
 
 import { visuallyHidden } from '@mui/utils'
@@ -80,6 +67,12 @@ const assetHeadCells = [
     numeric: true,
     disablePadding: false,
     label: 'quantity',
+  },
+  {
+    id: '',
+    numeric: true,
+    disablePadding: false,
+    label: '',
   },
 ]
 
@@ -232,22 +225,24 @@ TransactionEnhancedTableHead.propTypes = {
 
 export default function Accounts() {
   const [orderAssets, setOrderAssets] = useState('asc')
-  const [orderByAssets, setOrderByAssets] = useState('calories')
+  const [orderByAssets, setOrderByAssets] = useState('')
   const [orderTransactions, setOrderTransactions] = useState('asc')
-  const [orderByTransactions, setOrderByTransactions] = useState('calories')
+  const [orderByTransactions, setOrderByTransactions] = useState('')
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [assetdata, setAssetdata] = useState([])
   const [transactiondata, setTransactiondata] = useState([])
+  const [accountdata, setAccountData] = useState([])
 
   const { username } = useParams()
-  console.log(username)
 
   const transactionApiURL = 'http://localhost:8080/api/v1/transactions'
   var querytransactionApiURL = transactionApiURL + '?username=' + username
 
   const assetApiURL = 'http://localhost:8080/api/v1/assets'
   var queryassetApiURL = assetApiURL + '?username=' + username
+
+  const queryaccountApiURL = 'http://localhost:8080/api/v1/accounts/' + username
 
   /* FOR ASSETS */
   const assetHandleRequestSort = (event, property) => {
@@ -292,7 +287,6 @@ export default function Accounts() {
   const emptyTransactionRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - transactiondata.length) : 0
 
-  console.log(queryassetApiURL)
   useEffect(() => {
     fetch(queryassetApiURL)
       .then((response) => response.json())
@@ -300,6 +294,9 @@ export default function Accounts() {
     fetch(querytransactionApiURL)
       .then((response) => response.json())
       .then((json) => setTransactiondata(json))
+    fetch(queryaccountApiURL)
+      .then((response) => response.json())
+      .then((json) => setAccountData(json))
   }, [])
 
   const deleteAccount = () => {
@@ -307,134 +304,153 @@ export default function Accounts() {
   }
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Button>
-        <Link to={`/accounts/update/${username}`}>Edit Account</Link>
-      </Button>
-      <h1>Assets</h1>
-      <Button>
-        <Link to={`/currency/`}>Buy</Link>
-      </Button>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <TableContainer>
-          <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size="medium">
-            <EnhancedTableHead
-              order={orderAssets}
-              orderBy={orderByAssets}
-              onRequestSort={assetHandleRequestSort}
-              rowCount={assetdata.length}
-            />
-            <TableBody>
-              {/* if you don't need to support IE11, you can replace the `assetStableSort` call with:
-                 cdata.slice().sort(assetGetComparator(order, orderBy)) */}
-              {assetStableSort(assetdata, assetGetComparator(orderAssets, orderByAssets))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const labelId = `enhanced-table-checkbox-${index}`
+    <>
+      <Box sx={{ width: '100%' }}>
+        <Grid2 h1 xs={3} textAlign="center">
+          Account Balance:
+        </Grid2>
+        <Grid2 h1 xs={3} textAlign="center">
+          $ {accountdata && Math.round(accountdata.accountBalance * 100) / 100} USD
+        </Grid2>
+        <Grid2 h1 xs={6} textAlign="center">
+          Account Notes:
+        </Grid2>
+        <Grid2 h1 xs={6} textAlign="center">
+          {accountdata && accountdata.notes}
+        </Grid2>
+      </Box>
+      <Box sx={{ width: '100%' }}>
+        <Button>
+          <Link to={`/accounts/update/${username}`}>Edit Account</Link>
+        </Button>
+        <h1>Assets</h1>
+        <Button>
+          <Link to={`/currency/`}>Buy</Link>
+        </Button>
+        <Paper sx={{ width: '100%', mb: 2 }}>
+          <TableContainer>
+            <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size="medium">
+              <EnhancedTableHead
+                order={orderAssets}
+                orderBy={orderByAssets}
+                onRequestSort={assetHandleRequestSort}
+                rowCount={assetdata.length}
+              />
+              <TableBody>
+                {/* if you don't need to support IE11, you can replace the `assetStableSort` call with:
+                  cdata.slice().sort(assetGetComparator(order, orderBy)) */}
+                {assetStableSort(assetdata, assetGetComparator(orderAssets, orderByAssets))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    const labelId = `enhanced-table-checkbox-${index}`
 
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.id)}
-                      tabIndex={-1}
-                      key={row.id}
-                    >
-                      <TableCell align="right">{row.cryptoName}</TableCell>
-                      <TableCell align="right">{row.cryptoId}</TableCell>
-                      <TableCell component="th" id={labelId} scope="row" align="right">
-                        {row.quantity}
-                      </TableCell>
-                      {/* <TableCell align="right">
-                        <Link to={`/currency/purchase/${row.id}`}>
-                          <Button variant="contained">GO TO ADMIN</Button>
-                        </Link>
-                      </TableCell> */}
-                    </TableRow>
-                  )
-                })}
-              {emptyAssetRows > 0 && (
-                <TableRow
-                  style={{
-                    height: 53 * emptyAssetRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 20, 50]}
-          component="div"
-          count={assetdata.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={assetHandleChangePage}
-          onRowsPerPageChange={assetHandleChangeRowsPerPage}
-        />
-      </Paper>
-      <h1>Transactions</h1>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <TableContainer>
-          <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size="medium">
-            <TransactionEnhancedTableHead
-              order={orderTransactions}
-              orderBy={orderByTransactions}
-              onRequestSort={tHandleRequestSort}
-              rowCount={transactiondata.length}
-            />
-            <TableBody>
-              {/* if you don't need to support IE11, you can replace the `assetStableSort` call with:
-                 cdata.slice().sort(assetGetComparator(order, orderBy)) */}
-              {tStableSort(transactiondata, tGetComparator(orderTransactions, orderByTransactions))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const labelId = `enhanced-table-checkbox-${index}`
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row.id)}
+                        tabIndex={-1}
+                        key={row.assetId}
+                      >
+                        <TableCell align="left">{row.cryptoName}</TableCell>
+                        <TableCell align="right">{row.cryptoId}</TableCell>
+                        <TableCell component="th" id={labelId} scope="row" align="right">
+                          {row.quantity}
+                        </TableCell>
+                        <TableCell align="center">
+                          <Link to={`/accounts/account/${username}/sell?asset=${row.assetId}`}>
+                            <Button>Sell</Button>
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })}
+                {emptyAssetRows > 0 && (
+                  <TableRow
+                    style={{
+                      height: 53 * emptyAssetRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 20, 50]}
+            component="div"
+            count={assetdata.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={assetHandleChangePage}
+            onRowsPerPageChange={assetHandleChangeRowsPerPage}
+          />
+        </Paper>
+        <h1>Transactions</h1>
+        <Paper sx={{ width: '100%', mb: 2 }}>
+          <TableContainer>
+            <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size="medium">
+              <TransactionEnhancedTableHead
+                order={orderTransactions}
+                orderBy={orderByTransactions}
+                onRequestSort={tHandleRequestSort}
+                rowCount={transactiondata.length}
+              />
+              <TableBody>
+                {/* if you don't need to support IE11, you can replace the `assetStableSort` call with:
+                  cdata.slice().sort(assetGetComparator(order, orderBy)) */}
+                {tStableSort(
+                  transactiondata,
+                  tGetComparator(orderTransactions, orderByTransactions),
+                )
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    const labelId = `enhanced-table-checkbox-${index}`
 
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.id)}
-                      tabIndex={-1}
-                      key={row.id}
-                    >
-                      <TableCell align="right">{row.transactionId}</TableCell>
-                      <TableCell align="right">{row.cryptoId}</TableCell>
-                      <TableCell align="right">{row.cryptoName}</TableCell>
-                      <TableCell align="right">{row.exchangeRate}</TableCell>
-                      <TableCell align="right">{row.quantityTransacted}</TableCell>
-                      <TableCell component="th" id={labelId} scope="row" align="right">
-                        {row.quantity}
-                      </TableCell>
-                    </TableRow>
-                  )
-                })}
-              {emptyTransactionRows > 0 && (
-                <TableRow
-                  style={{
-                    height: 53 * emptyTransactionRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 20, 50]}
-          component="div"
-          count={transactiondata.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={tHandleChangePage}
-          onRowsPerPageChange={tHandleChangeRowsPerPage}
-        />
-      </Paper>
-      <Button onClick={deleteAccount} variant="contained" color="error">
-        Delete Account
-      </Button>
-    </Box>
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row.id)}
+                        tabIndex={-1}
+                        key={row.transactionId}
+                      >
+                        <TableCell align="left">{row.transactionId}</TableCell>
+                        <TableCell align="right">{row.cryptoId}</TableCell>
+                        <TableCell align="right">{row.cryptoName}</TableCell>
+                        <TableCell align="right">{row.exchangeRate}</TableCell>
+                        <TableCell align="right">{row.quantityTransacted}</TableCell>
+                        <TableCell component="th" id={labelId} scope="row" align="right">
+                          {row.quantity}
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })}
+                {emptyTransactionRows > 0 && (
+                  <TableRow
+                    style={{
+                      height: 53 * emptyTransactionRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 20, 50]}
+            component="div"
+            count={transactiondata.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={tHandleChangePage}
+            onRowsPerPageChange={tHandleChangeRowsPerPage}
+          />
+        </Paper>
+        <Button onClick={deleteAccount} variant="contained" color="error">
+          Delete Account
+        </Button>
+      </Box>
+    </>
   )
 }
