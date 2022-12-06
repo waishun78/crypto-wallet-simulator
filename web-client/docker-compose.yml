@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  app:
+    image: 93114806e557
+    build:
+      context: .
+    ports:
+      - 8080:80
+    

@@ -35,16 +35,6 @@ public class AppBackendApplication implements CommandLineRunner {
 	@Autowired
 	private AssetRepository assetRepository;
 
-	// @Bean
-	// public WebMvcConfigurer corsConfigurer() {
-	// 	return new WebMvcConfigurer() {
-	// 		@Override
-	// 		public void addCorsMappings(CorsRegistry registry) {
-	// 			registry.addMapping("api/v1/accounts").allowedOrigins("http://localhost:8080");
-	// 		}
-	// 	};
-	// }
-
 	@Override
 	public void run(String... args) throws Exception {
 
