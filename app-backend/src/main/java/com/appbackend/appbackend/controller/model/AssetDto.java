@@ -15,6 +15,14 @@ public class AssetDto {
         this.quantity = quantity;
     }
 
+    public AssetDto() {
+        this.assetId = null;
+        this.account = null;
+        this.cryptoId = null;
+        this.cryptoName = null;
+        this.quantity = null;
+    }
+
     public Long getAssetId() {
         return assetId;
     }

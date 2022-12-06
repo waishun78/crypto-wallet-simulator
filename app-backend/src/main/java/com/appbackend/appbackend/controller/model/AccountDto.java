@@ -1,6 +1,8 @@
 package com.appbackend.appbackend.controller.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class AccountDto {
     private String username;
@@ -10,7 +12,14 @@ public class AccountDto {
     private Collection<Long> assets;
     private Collection<Long> snapshots;
     private Collection<Long> transactions;
-
+    public AccountDto() {
+        this.username = null;
+        this.notes = null;
+        this.accountBalance = null;
+        this.assets = null;
+        this.snapshots = null;
+        this.transactions = null;
+    }
     public AccountDto(String username, String notes, Double accountBalance, Collection<Long> assets, Collection<Long> snapshots, Collection<Long> transactions) {
         this.username = username;
         this.notes = notes;

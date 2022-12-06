@@ -9,6 +9,14 @@ public class TransactionDto {
     private Double exchangeRate;
     private Double quantityTransacted;
 
+    public TransactionDto(){
+        this.transactionId = null;
+        this.account = null;
+        this.cryptoId = null;
+        this.cryptoName = null;
+        this.exchangeRate = null;
+        this.quantityTransacted = null;
+    }
     public TransactionDto(Long transactionId, String account, String cryptoId, String cryptoName, Double exchangeRate, Double quantityTransacted) {
         this.transactionId = transactionId;
         this.account = account;

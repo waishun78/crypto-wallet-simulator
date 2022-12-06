@@ -1,11 +1,11 @@
 package com.appbackend.appbackend.controller;
-
 import com.appbackend.appbackend.business.AssetService;
 import com.appbackend.appbackend.exception.ResourceNotFoundException;
 import com.appbackend.appbackend.model.Account;
 import com.appbackend.appbackend.model.Asset;
 import com.appbackend.appbackend.repository.AssetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,9 +47,13 @@ public class AssetController {
 
     // create asset REST API
     @PostMapping
-    public Asset createAsset(@RequestBody Asset asset){
-//        System.out.println(asset.getAssetId());
-        return assetService.create(asset);
+    public ResponseEntity<Asset> createAsset(@RequestBody Asset asset){
+        try {
+            Asset createdAsset = assetService.create(asset);
+            return new ResponseEntity<>(createdAsset, HttpStatus.ACCEPTED);
+        } catch (InvalidDataAccessApiUsageException e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 
     //get asset by id REST API

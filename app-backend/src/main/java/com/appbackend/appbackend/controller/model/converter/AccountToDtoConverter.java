@@ -6,7 +6,7 @@
 //import java.util.function.Function;
 //import java.util.stream.Collectors;
 //
-//public class UserToDtoConverter implements Function<Account, AccountDto> {
+//public class AccountToDtoConverter implements Function<Account, AccountDto> {
 //    @Override
 //    public AccountDto apply(Account account) {
 //        return new AccountDto(
