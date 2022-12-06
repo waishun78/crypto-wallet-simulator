@@ -33,7 +33,7 @@ import { visuallyHidden } from '@mui/utils'
 // const apiURL =
 //   'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false'
 
-const apiURL = 'http://localhost:3000/coins'
+const apiURL = 'http://localhost:8080/api/v1/transactions'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -67,34 +67,34 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'name',
+    id: 'id',
     numeric: false,
     disablePadding: false,
-    label: 'Name',
+    label: 'ID',
   },
   {
-    id: 'symbol',
+    id: 'accountId',
     numeric: true,
     disablePadding: false,
-    label: 'Symbol',
+    label: 'Account ID',
   },
   {
-    id: 'low_24h',
+    id: 'cryptoId',
     numeric: true,
     disablePadding: false,
-    label: '24H Low (USD)',
+    label: 'Cryptocurrency',
   },
   {
-    id: 'current_price',
+    id: 'exchangeRate',
     numeric: true,
     disablePadding: false,
-    label: 'Current Price (USD)',
+    label: 'Exchange Rate (USD/coin)',
   },
   {
-    id: 'total_supply',
+    id: 'quantityTransacted',
     numeric: true,
     disablePadding: false,
-    label: 'Total Supply',
+    label: 'Quantity Transacted',
   },
 ]
 
@@ -181,76 +181,79 @@ export default function Transactions() {
   }, [])
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <h1>TO UPDATE</h1>
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
-          >
-            <EnhancedTableHead
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              rowCount={cdata.length}
-            />
-            <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
+    <>
+      <h1>Transactions</h1>
+      <Box sx={{ width: '100%' }}>
+        <Paper sx={{ width: '100%', mb: 2 }}>
+          <TableContainer>
+            <Table
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+              size={dense ? 'small' : 'medium'}
+            >
+              <EnhancedTableHead
+                order={order}
+                orderBy={orderBy}
+                onRequestSort={handleRequestSort}
+                rowCount={cdata.length}
+              />
+              <TableBody>
+                {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  cdata.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(cdata, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const labelId = `enhanced-table-checkbox-${index}`
+                {stableSort(cdata, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    const labelId = `enhanced-table-checkbox-${index}`
 
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.id)}
-                      tabIndex={-1}
-                      key={row.name}
-                    >
-                      <TableCell component="th" id={labelId} scope="row">
-                        {row.name}
-                      </TableCell>
-                      <TableCell align="right">{row.symbol}</TableCell>
-                      <TableCell align="right">{row.low_24h}</TableCell>
-                      <TableCell align="right">{row.current_price}</TableCell>
-                      <TableCell align="right">
-                        <Link to={`/currency/purchase/${row.id}`}>
-                          <Button>BUY</Button>
-                        </Link>
-                      </TableCell>
-                    </TableRow>
-                  )
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 20, 50]}
-          component="div"
-          count={cdata.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row.id)}
+                        tabIndex={-1}
+                        key={row.transactedId}
+                      >
+                        <TableCell component="th" id={labelId} scope="row">
+                          {row.transactionId}
+                        </TableCell>
+                        <TableCell align="right">{row.account.username}</TableCell>
+                        <TableCell align="right">{row.cryptoId}</TableCell>
+                        <TableCell align="right">{row.exchangeRate}</TableCell>
+                        <TableCell align="right">{row.quantityTransacted}</TableCell>
+                        <TableCell align="right">
+                          <Link to={`/currency/purchase/${row.id}`}>
+                            <Button>BUY</Button>
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow
+                    style={{
+                      height: (dense ? 33 : 53) * emptyRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 20, 50]}
+            component="div"
+            count={cdata.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+        <FormControlLabel
+          control={<Switch checked={dense} onChange={handleChangeDense} />}
+          label="Dense padding"
         />
-      </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
-    </Box>
+      </Box>
+    </>
   )
 }

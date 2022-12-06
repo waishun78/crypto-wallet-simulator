@@ -4,10 +4,7 @@ import { CContainer } from '@coreui/react'
 
 import { Link } from 'react-router-dom'
 
-import axios from 'axios'
-
 import PropTypes from 'prop-types'
-import { alpha } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -17,15 +14,7 @@ import TableHead from '@mui/material/TableHead'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import TableSortLabel from '@mui/material/TableSortLabel'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
-import Checkbox from '@mui/material/Checkbox'
-import IconButton from '@mui/material/IconButton'
-import Tooltip from '@mui/material/Tooltip'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Switch from '@mui/material/Switch'
-import DeleteIcon from '@mui/icons-material/Delete'
 import AddBoxIcon from '@material-ui/icons/AddBox'
 import Button from '@mui/material/Button'
 
@@ -171,77 +160,80 @@ export default function Accounts() {
   }, [])
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Link to={`account/add`}>
-        <Button>
-          <AddBoxIcon>Icon</AddBoxIcon>
-          Add Account
-        </Button>
-      </Link>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
-          >
-            <EnhancedTableHead
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              rowCount={cdata.length}
-            />
-            <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
+    <>
+      <h1>Accounts</h1>
+      <Box sx={{ width: '100%' }}>
+        <Link to={`account/add`}>
+          <Button>
+            <AddBoxIcon>Icon</AddBoxIcon>
+            Add Account
+          </Button>
+        </Link>
+        <Paper sx={{ width: '100%', mb: 2 }}>
+          <TableContainer>
+            <Table
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+              size={dense ? 'small' : 'medium'}
+            >
+              <EnhancedTableHead
+                order={order}
+                orderBy={orderBy}
+                onRequestSort={handleRequestSort}
+                rowCount={cdata.length}
+              />
+              <TableBody>
+                {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  cdata.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(cdata, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const labelId = `enhanced-table-checkbox-${index}`
+                {stableSort(cdata, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    const labelId = `enhanced-table-checkbox-${index}`
 
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.username)}
-                      tabIndex={-1}
-                      key={row.username}
-                    >
-                      <TableCell component="th" id={labelId} scope="row">
-                        {row.username}
-                      </TableCell>
-                      <TableCell align="right">{row.notes}</TableCell>
-                      <TableCell align="right">{row.accountBalance}</TableCell>
-                      <TableCell align="right">{row.current_price}</TableCell>
-                      <TableCell align="right">
-                        <Link to={`/accounts/account/${row.username}`}>
-                          <Button variant="contained">GO TO ADMIN</Button>
-                        </Link>
-                      </TableCell>
-                    </TableRow>
-                  )
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 20, 50]}
-          component="div"
-          count={cdata.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </Box>
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row.username)}
+                        tabIndex={-1}
+                        key={row.username}
+                      >
+                        <TableCell component="th" id={labelId} scope="row">
+                          {row.username}
+                        </TableCell>
+                        <TableCell align="right">{row.notes}</TableCell>
+                        <TableCell align="right">{row.accountBalance}</TableCell>
+                        <TableCell align="right">{row.current_price}</TableCell>
+                        <TableCell align="right">
+                          <Link to={`/accounts/account/${row.username}`}>
+                            <Button variant="contained">GO TO ADMIN</Button>
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow
+                    style={{
+                      height: (dense ? 33 : 53) * emptyRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 20, 50]}
+            component="div"
+            count={cdata.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      </Box>
+    </>
   )
 }
