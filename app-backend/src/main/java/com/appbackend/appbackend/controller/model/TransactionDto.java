@@ -1,4 +1,4 @@
-package com.appbackend.appbackend.controller.model_archived;
+package com.appbackend.appbackend.controller.model;
 
 public class TransactionDto {
 
