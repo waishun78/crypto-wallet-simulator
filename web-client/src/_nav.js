@@ -4,25 +4,25 @@ import {
   cilBell,
   cilCalculator,
   cilChartPie,
-  cilCursor,
-  cilDescription,
+  // cilCursor,
+  // cilDescription,
   cilDrop,
   cilNotes,
-  cilPencil,
-  cilPuzzle,
-  cilSpeedometer,
+  // cilPencil,
+  // cilPuzzle,
+  // cilSpeedometer,
   cilStar,
-  cibQuantopian,
+  // cibQuantopian,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
 const _nav = [
-  {
-    component: CNavItem,
-    name: 'Dashboard',
-    to: '/dashboard',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Dashboard',
+  //   to: '/dashboard',
+  //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  // },
   {
     component: CNavTitle,
     name: 'Tabs',
@@ -56,16 +56,16 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'Portfolios',
-    to: '/portfolios',
-    icon: <CIcon icon={cibQuantopian} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
     name: 'Transactions',
     to: '/transactions',
     icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
   },
+  // {
+  //   component: CNavItem,
+  //   name: 'Portfolios',
+  //   to: '/portfolios',
+  //   icon: <CIcon icon={cibQuantopian} customClassName="nav-icon" />,
+  // },
   // {
   //   component: CNavTitle,
   //   name: 'Extras',
