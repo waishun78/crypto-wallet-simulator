@@ -1,0 +1,404 @@
+openapi: 3.0.3
+info:
+  title: Cryptowallet Simulator
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080'
+paths:
+  /accounts:
+    get:
+      summary: Return all accounts
+      description: Read all accounts
+      responses:
+        200:
+          description: All accounts are returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/user'
+        default:
+          description: Unexpected error
+    post:
+      summary: Create a user
+      description: Create a user
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        default:
+          description: user successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'          
+  /accounts/{accountId}:
+    get:
+      summary: Returns a user by accountId
+      description: Returns a user by accountId.
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'   
+        '400':
+          description: Invalid accountId supplied
+        '404':
+          description: user not found
+    put:
+      summary: Update a user by accountId
+      description: Update a user by accountId
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+            minimum: 1
+      requestBody:
+        description: Updated user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/user'   
+          '400':
+            description: Invalid accountId supplied
+          '404':
+            description: user not found
+    delete:
+      summary: Deletes a user by accountId
+      description: Deletes a user by accountId
+      parameters:
+        - name: accountId
+          in: path
+          description: accountId of user to delete
+          required: true
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: Successfully deleted
+        '400':
+          description: Invalid accountId
+
+  /transactions:
+    get:
+      summary: Return all transactions
+      description: Read all transactions
+      parameters:
+        - in: query
+          name: accountId
+          required: false
+          schema:
+            type: string
+            description: accountId you wish to retrieve the transaction from
+      responses:
+        200:
+          description: All transactions are returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/transaction'
+        default:
+          description: Unexpected error
+    post:
+      summary: Create a transaction
+      description: Create a transaction
+      requestBody:
+        description: Created transaction object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transaction'
+      responses:
+        default:
+          description: user successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction'
+    delete:
+      summary: Deletes a transaction by account
+      description: Deletes a transaction by account
+      parameters:
+        - in: query
+          name: accountId
+          required: false
+          schema:
+            type: string
+            description: accountId you wish to delete all the transaction for
+      responses:
+        '200':
+          description: Successfully deleted
+        '400':
+          description: Invalid accountId 
+                
+  /transactions/{transactionId}:
+    get:
+      summary: Returns a transaction by transactionId
+      description: Returns a transaction by transactionId.
+      parameters:
+        - in: path
+          name: transactionId
+          required: true
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction'   
+        '400':
+          description: Invalid transactionId supplied
+        '404':
+          description: transaction not found
+    put:
+      summary: Update a transaction by transactionId
+      description: Update a transaction by transactionId
+      parameters:
+        - in: path
+          name: transactionId
+          required: true
+          schema:
+            type: string
+            minimum: 1
+      requestBody:
+        description: Updated transaction object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transaction'
+      responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/transaction'   
+          '400':
+            description: Invalid transactionId supplied
+          '404':
+            description: transaction not found
+    delete:
+      summary: Deletes a transaction by transactionId
+      description: Deletes a transaction by transactionId
+      parameters:
+        - name: transactionId
+          in: path
+          description: transactionId of transaction to delete
+          required: true
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: Successfully deleted
+        '400':
+          description: Invalid transactionId 
+  /assets:
+    get:
+      summary: Return all assets
+      description: Read all assets
+      parameters:
+        - in: query
+          name: accountId
+          required: false
+          schema:
+            type: string
+            description: accountId you wish to retrieve the asset from
+      responses:
+        200:
+          description: All assets are returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/asset'
+        default:
+          description: Unexpected error
+    post:
+      summary: Create an asset
+      description: Create a asset
+      requestBody:
+        description: Created asset object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/asset'
+      responses:
+        default:
+          description: asset successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/asset'
+    delete:
+      summary: Deletes a asset by account
+      description: Deletes a asset by account
+      parameters:
+        - in: query
+          name: accountId
+          required: false
+          schema:
+            type: string
+            description: accountId you wish to delete all the asset for
+      responses:
+        '200':
+          description: Successfully deleted
+        '400':
+          description: Invalid accountId 
+                
+  /assets/{assetId}:
+    get:
+      summary: Returns a asset by assetId
+      description: Returns a asset by assetId.
+      parameters:
+        - in: path
+          name: assetId
+          required: true
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/asset'   
+        '400':
+          description: Invalid assetId supplied
+        '404':
+          description: asset not found
+    put:
+      summary: Update a asset by assetId
+      description: Update a asset by assetId
+      parameters:
+        - in: path
+          name: assetId
+          required: true
+          schema:
+            type: string
+            minimum: 1
+      requestBody:
+        description: Updated asset object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/asset'
+      responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/asset'   
+          '400':
+            description: Invalid assetId supplied
+          '404':
+            description: asset not found
+    delete:
+      summary: Deletes a asset by assetId
+      description: Deletes a asset by assetId
+      parameters:
+        - name: assetId
+          in: path
+          description: assetId of asset to delete
+          required: true
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: Successfully deleted
+        '400':
+          description: Invalid assetId 
+        
+        
+        
+components:
+  schemas:
+    user:
+        type: object
+        properties:
+          accountname:
+            type: string
+            example: account1
+          notes:
+            type: string
+            example: Here are notes for the user investment strategy
+          accountBalance:
+            type: integer
+            format: int64
+            example: 10000
+    transaction:
+        type: object
+        properties:
+          transactionId:
+            type: integer
+            format: int64
+            example: 12415
+          user:
+            type: object
+            $ref: '#/components/schemas/user'
+          cryptoId:
+            type: string
+            example: bitcoin
+          cryptoName:
+            type: string
+            example: bitcoin
+          exchangeRate:
+            type: integer
+            format: int64
+            example: 12.313
+          quantityTransacted:
+            type: integer
+            format: int64
+            example: 44.34
+    asset:
+        type: object
+        properties:
+          assetId:
+            type: integer
+            format: int64
+            example: 393
+          user:
+            type: object
+            $ref: '#/components/schemas/user'
+          cryptoId:
+            type: string
+            example: bitcoin
+          cryptoName:
+            type: string
+            example: bitcoin
+          quantity:
+            type: integer
+            format: int64
+            example: 32.34
