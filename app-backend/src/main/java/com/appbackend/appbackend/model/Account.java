@@ -39,4 +39,14 @@ public class Account implements DomainEntity<String>, Serializable {
     public String getId() {
         return this.username;
     }
+
+    public boolean isEqualTo(Account account1) {
+        if (this.username == account1.getUsername() &&
+                this.accountBalance == account1.getAccountBalance() &&
+                this.notes == account1.getNotes()){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

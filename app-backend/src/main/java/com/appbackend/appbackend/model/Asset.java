@@ -34,4 +34,17 @@ public class Asset implements DomainEntity<Long>, Serializable {
     public Long getId() {
         return this.assetId;
     }
+
+    public boolean isEqualTo(Asset assetInRepo) {
+        if (this.assetId == assetInRepo.getAssetId() &&
+                this.quantity == assetInRepo.getQuantity() &&
+                this.account == assetInRepo.getAccount() &&
+                this.cryptoId == assetInRepo.getCryptoId() &&
+                this.cryptoName == assetInRepo.getCryptoName()
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
