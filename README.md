@@ -17,37 +17,37 @@ Note: accountBalance refers to the money the account currently owns to make futu
     - Buy Currency
     - Sell Currency
 ### Stretch Goal
-- ~~ Monitor value of portfolios of particular trades ~~
+- ~~Monitor value of portfolios of particular trades~~
 - View Cryptocurrency Market Value
-- ~~ Sort/Filter Accounts by performance ~~
+- ~~Sort/Filter Accounts by performance~~
 
 ## Backend Functionalities/Query
 - Create, Read, Update and Delete cryptocurrencies owned (CRUD)
-- ~~ Get all the users with the top performing accounts/portfolios ~~
+- ~~Get all the users with the top performing accounts/portfolios~~
 ### Stretch Goal
 - Sort ~~/Filter~~ cryptocurrencies owned by value
-- Sort ~~~/Filter~~ all cryptocurrencies by value
-- ~~ Get all the users with the top performing accounts/portfolios ~~
+- Sort ~~/Filter~~ all cryptocurrencies by value
+- ~~Get all the users with the top performing accounts/portfolios~~
 
 ## How to run the application?
 The application consists of 3 components: a client (React.js web frontend interface), a Spring RESTful API and a MySQL database. For the ease of setup, dockerfiles have been provided.
 
 ### Setting up Spring Backend and MySQL
-Build a jar file for the spring boot app by doing Maven build in any IDE you are using.
+1. Build a jar file for the spring boot app by doing Maven build in any IDE you are using.
     - This creates a jar file inside the target folder of the project structure.
-Go to the `app-backend` using `cd app-backend` from the root directory.
-Run `docker build -t app-backend` to build the docker image for the application using the Dockerfile provided.
-Run `docker pull mysql` to retrieve the docker image for MySQL.
-Use `ls` to check if `docker-compose.yml` is in the directory.
+2. Go to the `app-backend` using `cd app-backend` from the root directory.
+3. Run `docker build -t app-backend` to build the docker image for the application using the Dockerfile provided.
+4. Run `docker pull mysql` to retrieve the docker image for MySQL.
+5. Use `ls` to check if `docker-compose.yml` is in the directory.
     - You now have the docker images to run both the MySQL container and the Spring Boot container. You will aggregate the output of each docker images using docker-compose.yml file.
 Run `docker compose up`.
 The Spring Boot application is now running on port 8080 on the local host.
 
 ### Setting up React
-Go to the `web-client` using `cd web-client` from the root directory.
-Create docker images using `docker build . -t react-docker-image`.
-Run said docker image using `docker run react-docker-image`.
-The react application is currently running on port 3000 on the local host.
+1. Go to the `web-client` using `cd web-client` from the root directory.
+2. Create docker images using `docker build . -t react-docker-image`.
+3. Run said docker image using `docker run react-docker-image`.
+4. The react application is currently running on port 3000 on the local host.
 
 Note: As the Reat.js application is fetching data from both the coingecko API and the app-backend Spring RESTful API, make sure that both are working as intended before running the application when debugging.
 
