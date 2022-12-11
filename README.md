@@ -52,4 +52,4 @@ The Spring Boot application is now running on port 8080 on the local host.
 Note: As the Reat.js application is fetching data from both the coingecko API and the app-backend Spring RESTful API, make sure that both are working as intended before running the application when debugging.
 
 ### Testing
-A `app-backend.postman_collection.json ` has been provided for testing using Postman. Simply import the collection to run the tests.
+A `app-backend.postman_collection.json ` has been provided for testing using Postman. Import the collection to run the tests.
