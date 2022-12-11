@@ -7,7 +7,7 @@ Users may create multiple accounts with different objectives and risk profiles a
 All live cryptocurrency information was queried from the public free API: https://www.coingecko.com/en/api.
 
 ## Objects
-<IMAGE TO UPDATE>
+![Java Tech](https://user-images.githubusercontent.com/64391406/206926887-ba8ce15f-8c08-4f93-b4f4-21e39495aed1.jpg)
 Note: accountBalance refers to the money the account currently owns to make future transactions.
 
 ## Client Functionalities 
