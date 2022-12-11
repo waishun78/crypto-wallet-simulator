@@ -219,11 +219,6 @@ export default function Transactions() {
                         <TableCell align="right">{row.cryptoId}</TableCell>
                         <TableCell align="right">{row.exchangeRate}</TableCell>
                         <TableCell align="right">{row.quantityTransacted}</TableCell>
-                        <TableCell align="right">
-                          <Link to={`/currency/purchase/${row.id}`}>
-                            <Button>BUY</Button>
-                          </Link>
-                        </TableCell>
                       </TableRow>
                     )
                   })}

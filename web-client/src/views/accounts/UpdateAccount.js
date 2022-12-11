@@ -18,8 +18,8 @@ export default function UpdateAccount() {
   console.log(username)
   const accountUpdateURL = 'http://localhost:8080/api/v1/accounts/' + username
 
-  const [notes, setNotes] = useState('')
-  const [accountBalance, setAccountBalance] = useState(0)
+  const [notes, setNotes] = useState()
+  const [accountBalance, setAccountBalance] = useState()
 
   const onSubmit = () => {
     console.log(username)

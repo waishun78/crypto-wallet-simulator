@@ -11,7 +11,7 @@ import { makeTransaction } from './Utility2'
 // import { makeTransaction } from './Utility'
 // import { Button } from '@mui/material'
 
-export default function Purchase() {
+export default function Sell() {
   // username = account username
   const { username } = useParams()
   // assetId is id of asset to sell
@@ -48,7 +48,10 @@ export default function Purchase() {
         var currencyQueryURL = currencyURL + '/' + json.cryptoId
         fetch(currencyQueryURL)
           .then((response) => response.json())
-          .then((json) => setCurrencyData(json))
+          .then((json) => {
+            console.log(json)
+            setCurrencyData(json)
+          })
       })
   }, [])
 
