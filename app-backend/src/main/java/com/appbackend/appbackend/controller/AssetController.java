@@ -1,4 +1,5 @@
 package com.appbackend.appbackend.controller;
+import com.appbackend.appbackend.business.AccountService;
 import com.appbackend.appbackend.business.AssetService;
 import com.appbackend.appbackend.exception.ResourceNotFoundException;
 import com.appbackend.appbackend.model.Account;
@@ -22,8 +23,11 @@ import java.util.stream.StreamSupport;
 @RequestMapping("api/v1/assets")
 public class AssetController {
 
-    @Autowired
     protected AssetService assetService;
+
+    public AssetController(AssetService assetService) {
+        this.assetService = assetService;
+    }
 
     /**
      *

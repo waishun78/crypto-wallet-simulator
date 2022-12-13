@@ -2,6 +2,7 @@ package com.appbackend.appbackend.controller;
 
 import com.appbackend.appbackend.business.AccountService;
 import com.appbackend.appbackend.model.Account;
+import com.appbackend.appbackend.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,10 @@ import java.util.stream.StreamSupport;
 @RequestMapping("api/v1/accounts")
 public class AccountController {
 
-    @Autowired
     protected AccountService accountService;
+    public AccountController(AccountService accountService) {
+        this.accountService = accountService;
+    }
 
     @GetMapping
     public List<Account> getAllAccounts(){

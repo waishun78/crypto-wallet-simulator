@@ -1,5 +1,6 @@
 package com.appbackend.appbackend.controller;
 
+import com.appbackend.appbackend.business.AccountService;
 import com.appbackend.appbackend.business.TransactionService;
 import com.appbackend.appbackend.exception.ResourceNotFoundException;
 import com.appbackend.appbackend.model.Asset;
@@ -23,8 +24,11 @@ import java.util.stream.StreamSupport;
 @RequestMapping("api/v1/transactions")
 public class TransactionController {
 
-    @Autowired
     protected TransactionService transactionService;
+
+    public TransactionController(TransactionService transactionService) {
+        this.transactionService = transactionService;
+    }
 
     @GetMapping
     public List<Transaction> getFilteredTransactionsByUsername(@RequestParam(value="username", required = false) String username){
