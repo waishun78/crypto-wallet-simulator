@@ -35,7 +35,6 @@ public class AccountController {
 
     @GetMapping
     public List<Account> getAllAccounts(){
-        // TODO: Convert actual account object to accountDTO
         return StreamSupport.stream(accountService.readAll().spliterator(), false).collect(Collectors.toList());
     }
 

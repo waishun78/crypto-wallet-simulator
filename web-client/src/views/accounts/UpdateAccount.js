@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-
-import { CContainer } from '@coreui/react'
-
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 
 import axios from 'axios'
 
-import { alpha } from '@mui/material/styles'
-import { OutlinedInput, TextField } from '@material-ui/core'
+import { OutlinedInput } from '@material-ui/core'
 import Grid2 from '@mui/material/Unstable_Grid2' // Grid2 version 2
 
 import Button from '@mui/material/Button'
@@ -21,6 +16,8 @@ export default function UpdateAccount() {
   const [notes, setNotes] = useState()
   const [accountBalance, setAccountBalance] = useState()
 
+  const navigate = useNavigate()
+
   const onSubmit = () => {
     console.log(username)
     console.log(notes)
@@ -29,6 +26,7 @@ export default function UpdateAccount() {
       notes: notes,
       accountBalance: accountBalance,
     })
+    navigate('/accounts')
   }
 
   return (

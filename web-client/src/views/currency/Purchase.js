@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import Timer from './PurchaseComponents/Timer'
 import AccountSelector from './PurchaseComponents/AccountSelector'
@@ -31,7 +31,9 @@ export default function Purchase() {
       {/* <CurrencySelector id={currencyId} updateCurrencyFunction={updateCurrencyIdFromChild} /> */}
       <CurrencyConverter id={id} updateParentAmount={updateParentAmount} />
       {/* {accountChoice} */}
-      <Button onClick={() => makeTransaction(accountChoice, amount, id)}>Submit</Button>
+      <Button onClick={() => makeTransaction(accountChoice, amount, id)}>
+        <Link to={`/transactions`}>Submit</Link>
+      </Button>
     </>
   )
 }
