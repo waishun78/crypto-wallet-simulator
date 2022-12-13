@@ -46,8 +46,10 @@ The Spring Boot application is now running on port 8080 on the local host.
 ### Setting up React
 1. Go to the `web-client` using `cd web-client` from the root directory.
 2. Create docker images using `docker build . -t react-docker-image`.
-3. Run said docker image using `docker run react-docker-image`.
-4. The react application is currently running on port 3000 on the local host.
+3. Run `docker images` and get the image id, eg.51be26b99408.
+4. Open docker-compose.yml in web-client and replace the image id with the one copied in step 3.
+5. Run said docker image using `docker compose up`.
+6. The react application is currently running on port 3000 on the local host.
 
 Note: As the Reat.js application is fetching data from both the coingecko API and the app-backend Spring RESTful API, make sure that both are working as intended before running the application when debugging.
 
