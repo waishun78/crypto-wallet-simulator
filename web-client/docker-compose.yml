@@ -2,9 +2,9 @@ version: "3.8"
 
 services:
   app:
-    image: 93114806e557
+    image: 51be26b99408
     build:
       context: .
     ports:
-      - 8080:80
+      - 3000:3000
     

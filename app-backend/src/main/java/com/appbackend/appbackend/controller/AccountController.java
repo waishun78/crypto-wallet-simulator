@@ -1,6 +1,8 @@
 package com.appbackend.appbackend.controller;
 
 import com.appbackend.appbackend.business.AccountService;
+import com.appbackend.appbackend.business.AssetService;
+import com.appbackend.appbackend.business.TransactionService;
 import com.appbackend.appbackend.model.Account;
 import com.appbackend.appbackend.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +23,15 @@ import java.util.stream.StreamSupport;
 public class AccountController {
 
     protected AccountService accountService;
-    public AccountController(AccountService accountService) {
+    public TransactionService transactionService;
+    public AssetService assetService;
+    public AccountController(AccountService accountService, TransactionService transactionService, AssetService assetService) {
         this.accountService = accountService;
+        this.assetService = assetService;
+        this.transactionService = transactionService;
     }
+
+
 
     @GetMapping
     public List<Account> getAllAccounts(){
@@ -58,6 +66,8 @@ public class AccountController {
     // delete account REST API
     @DeleteMapping("{username}")
     public ResponseEntity<Account> deleteAccount(@PathVariable String username){
+        assetService.deleteAssetByUsername(username);
+        transactionService.deleteTransactionByUsername(username);
         accountService.deleteById(username);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     };
